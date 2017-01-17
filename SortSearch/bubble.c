@@ -18,11 +18,10 @@ void swap(int *e1, int *e2){
 	*e2 = temp;
 }
 
-void displayArr(int arr[], size_t arrLen, int currIter){
+void displayArr(int arr[], size_t arrLen){
 	
 	int i;
-	printf("Iteration: %d; Array: ", currIter);
-	for(i=0; i < arrLen, i++){
+	for(i=0; i < arrLen; i++){
 		printf(" %d ", arr[i]);
 	}
 	printf("\n");
@@ -42,23 +41,32 @@ void bubbleSort(int arr[], size_t arrLen){
 		for(j = 0; j < arrLen; j++){
 			//Look at the first two elements and checks which one is greater
 			if(arr[j] > arr[j+1]){
+
 				//If not in correct order, values are swapped
 				swap(&arr[j], &arr[j+1]);
+
+//NOTE: Can be optimized slightly if no elements were swapped by the inner loop
+//  in the case that the array was already sorted. Can be accomplished using a 
+//  boolean flag.
+
 			}			
 		}
-
-		//Display results after current iteration with update last element
-		displayArr(arr, arrLen, i);
-
 	}
+	//Display results after current iteration with update last element
+	printf("Sorted Array: ");
+    displayArr(arr, arrLen);
 }
 
 
 //Driver program for testing purposes
 int main(){
 
-	int arr[] = {5,1,4,2,8};
+	int arr[] = {1,8,4,6,0,3,5,2,7,9};
+    int i;
 	size_t arrLen = (int) ( sizeof(arr) / sizeof(arr[0]));
+
+    printf("Initial Array: ");
+	displayArr(arr, arrLen);
 
 	bubbleSort(arr, arrLen);
 
