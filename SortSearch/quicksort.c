@@ -15,45 +15,62 @@ void swap(int *e1, int *e2){
 }
 
 //Helper function used to display a given array (for testing results )
-void displayArr(int arr[], size_t arrLen, int currIter){
+void displayArr(int arr[], size_t arrLen){
 	
 	int i;
-	printf("Iteration: %d; Array: ", currIter);
-	for(i=0; i < arrLen, i++){
+	for(i=0; i < arrLen; i++){
 		printf(" %d ", arr[i]);
 	}
 	printf("\n");
 }
 
 //Used by quick sort to determine the pivot value to divide up array
-int qsPartition(int arr[], int iLeft, int iRight){
+int qsPartition(int arr[], int leftVal, int rightVal){
 
 	int i;
-	//First select the initial pivot value
-	int iPivot = arr[iRight];
+	//First select the initial pivot value and left indices
+	int iPivot = arr[rightVal];
+    int leftInd = (leftVal -1);
 
-	//Iterate through the array until the value before the initial pivot is selected 
-	for(i = 0; i < iRight; i++){
-		
+	//Iterate through the array and make sure that values less than pivot are 
+    //on the left side 
+	for(i = leftVal; i < rightVal; i++){
+	
 		//While left value is less than pivot, move the left pointer over to the right
-		//While right value is greater than pivot move the right pointer to the left
-		//If both don't match then swap left and right
-		//If the left is greater than the right, swap the right position with the pivot 	
-			//This will generate the partitions for the quickSort		
-	}
+        if(arr[i] < iPivot){
+            //Move the left indices to the right if current index is less than pivot
+            leftInd++;
+            //NOTE: By swapping the left indices and current iterative position, the 
+            //values larger than the pivot are swapped with the adjacent values
+            swap(&arr[leftInd], &arr[i]);
+        }
+
+    }
+
+    //After making sure that the values less than the pivot are in correct locs
+    //place the pivot to the right of this location
+    swap(&arr[leftInd + 1], &arr[rightVal]);
+
+    //return the current location of the pivot
+    return (leftInd+1);
 
 }
 
 void quickSort(int arr[], int min, int max){
 
-	//Find the pivot value by partitioning the array with qsPartition
-	int iPivot = qsPartition(arr, min, max);
+    //Make sure that the min arg is less than that of the max to see if sort is 
+    //  completed
+    if(max > min){
 
-	//recursively quicksort the left partition 
-	quicksort(arr, min, iPivot-1);
+	    //Find the pivot value by partitioning the array with qsPartition
+	    int iPivotInd = qsPartition(arr, min, max);
 
-	//recursively quicksort the right partition
-	quicksort(arr, iPivot+1, max);
+	    //recursively quicksort the left partition 
+	    quickSort(arr, min, iPivotInd-1);
+
+	    //recursively quicksort the right partition
+	    quickSort(arr, iPivotInd+1, max);
+    }
 
 }
 
@@ -64,7 +81,13 @@ int main(){
 	int arr[] = {5,1,4,2,8};
 	size_t arrLen = (int) ( sizeof(arr) / sizeof(arr[0]));
 
+    printf("Initial Array: ");
+    displayArr(arr, arrLen);
+
 	quickSort(arr, 0, arrLen-1);
 
-	return 0;
+    printf("Sorted Array: ");
+    displayArr(arr, arrLen);
+	
+    return 0;
 }
