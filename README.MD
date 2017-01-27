@@ -4,11 +4,14 @@ A folder to contain implementations of data structures and searching methods for
 
 ### Current contents
 
-bubble.c - Simple C implementation of bubble sort using swap method and 2D for loop
+SortSearch: A directory that will contain implementations of simple sorting and search algorithms.
+1. bubble.c - Simple C implementation of bubble sort using swap method and 2D for loop
+2. quicksort.c - C implementation of the quick sort algorithm with same helper functions as bubble.c 
+3. mergesort.c - C implementation of the merge sort algorithm
 
 
-### Compilation/Execution
-TODO: Include compilation instructions when proper executable is being generated
+CtCI: A Directory that will contain implementations of selected problems from the Cracking the Coding Interview textbook
+1. matrixRotate.c
 
-### References
-TODO: Add resources as they become apparent 
+
+
