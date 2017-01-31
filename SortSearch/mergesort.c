@@ -1,6 +1,6 @@
 /*
 Casey O'Kane 
- Merge Sort Implementation 
+ Geeks For Geeks Merge Sort Implementation 
 */
 
 #include <stdio.h>
@@ -15,6 +15,7 @@ void displayArr(int arr[], size_t arrLen){
 	printf("\n");
 }
 
+
 //Function used to merge the elements that are split intially
 void merge(int arr[], int iMin, int iMid, int iMax){
 
@@ -22,40 +23,31 @@ void merge(int arr[], int iMin, int iMid, int iMax){
 	int iLeftCtr = 0; int iRightCtr = 0; int iArrCtr = 0;
 
 	//Determine the total current array size
-	int currArrSize = iMax - iMin;
 	int leftArrSize = (iMid - iMin) + 1;
 	int rightArrSize = iMax - iMid;
+	int currArrSize = iMax - iMin;
 
     //Create new arrays for the two seperate subarrays
 	int currLeftArr[leftArrSize]; int currRightArr[rightArrSize];
 
 	//Fill temp arrays with values 
-	while(iArrCtr < currArrSize){
-		
-		//Append left elements up until the midpoint 
-		if(iArrCtr <= iMid){
-			currLeftArr[iLeftCtr] = arr[iArrCtr];
-			iLeftCtr++;
-		}
-		//Append right elements
-		else{
-			currRightArr[iRightCtr] = arr[iArrCtr];
-			iRightCtr++;
-		}
+    for (iLeftCtr = 0; iLeftCtr < leftArrSize; iLeftCtr++){
+       currLeftArr[iLeftCtr] = arr[iMin + iLeftCtr];
+    }
 
-		//Append array counter
-		iArrCtr++;
-
-	}
+    for (iRightCtr = 0; iRightCtr < rightArrSize; iRightCtr++){
+        currRightArr[iRightCtr] = arr[iMid + 1+ iRightCtr];
+    }
 
 	//Reinitialize counter values 
-	int iLeftCtr = 0; int iRightCtr = 0;
+	iLeftCtr = 0; iRightCtr = 0; 
 
     //Iterate for values less than the combined length
-    for(iArrCtr = 0; iArrCtr <= currArrSize; iArrCtr++){
+    for(iArrCtr = iMin; iArrCtr <= currArrSize; iArrCtr++){
 
     	//Check if end of array has been reached
-    	if((iLeftCtr) < leftArrSize && (iRightCtr < rightArrSize)){
+    	if((iLeftCtr < leftArrSize) && (iRightCtr < rightArrSize)){
+    	//while((iLeftCtr < leftArrSize) && (iRightCtr < rightArrSize)){
 	    	//Compare elements of each list (use seperate iterators)
 	    	if(currLeftArr[iLeftCtr] <= currRightArr[iRightCtr]){
 	    		arr[iArrCtr] = currLeftArr[iLeftCtr];
@@ -69,27 +61,27 @@ void merge(int arr[], int iMin, int iMid, int iMax){
     	}
 
 		//If counters at the end of respective lists, select smallest element
-    	//Check if left array has been exhausted
-		else if(iLeftCtr >= leftArrSize){
-    		arr[iArrCtr] = currRightArr[iRightCtr];
-    		iRightCtr++;  			
-		}
-
-		//Include case to check for empty right array
-		else{
+    	//Check if right array has been exhausted
+		else if(iLeftCtr < leftArrSize){
     		arr[iArrCtr] = currLeftArr[iLeftCtr];
     		iLeftCtr++;			
 		}
 
-	}
+		//Include case to check for empty left array
+		else{
+    		arr[iArrCtr] = currRightArr[iRightCtr];
+    		iRightCtr++;  			
+		}
 
+	}
+	
 }
 
 //The actual Merge Sort algorithm which operates recursively
 void mergeSort(int arr[], int min, int max){
 
 	//Make sure that array is at least one element in length 
-	if(min <= max){
+	if(min < max){
 	    //Divide array into two halves by finding the midpoint
 	    int iMid = (min+max)/2;
 	    
@@ -107,7 +99,7 @@ void mergeSort(int arr[], int min, int max){
 //Driver program for testing purposes
 int main(){
 
-	int arr[] = {1,8,4,6,0,3,5,2,7,9};
+	int arr[] = {12, 11, 13, 5, 6, 7};
 	//NOTE: Explore alternatives for determining array length in C
 	size_t arrLen = (int) ( sizeof(arr) / sizeof(arr[0]));
 
