@@ -52,8 +52,8 @@ void bubbleSort(int arr[], size_t arrLen){
 			}			
 		}
 	}
-	//Display results after current iteration with update last element
-	printf("Sorted Array: ");
+    //Display results after current iteration with update last element
+    printf("Sorted Array: ");
     displayArr(arr, arrLen);
 }
 
@@ -61,14 +61,14 @@ void bubbleSort(int arr[], size_t arrLen){
 //Driver program for testing purposes
 int main(){
 
-	int arr[] = {1,8,4,6,0,3,5,2,7,9};
+    int arr[] = {1,8,4,6,0,3,5,2,7,9};
     int i;
-	size_t arrLen = (int) ( sizeof(arr) / sizeof(arr[0]));
+    size_t arrLen = (int) ( sizeof(arr) / sizeof(arr[0]));
 
     printf("Initial Array: ");
-	displayArr(arr, arrLen);
+    displayArr(arr, arrLen);
 
-	bubbleSort(arr, arrLen);
+    bubbleSort(arr, arrLen);
 
-	return 0;
+    return 0;
 }

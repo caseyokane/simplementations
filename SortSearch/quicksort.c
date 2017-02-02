@@ -27,16 +27,16 @@ void displayArr(int arr[], size_t arrLen){
 //Used by quick sort to determine the pivot value to divide up array
 int qsPartition(int arr[], int leftVal, int rightVal){
 
-	int i;
-	//First select the initial pivot value and left indices
-	int iPivot = arr[rightVal];
+    int i;
+    //First select the initial pivot value and left indices
+    int iPivot = arr[rightVal];
     int leftInd = (leftVal -1);
 
-	//Iterate through the array and make sure that values less than pivot are 
+    //Iterate through the array and make sure that values less than pivot are 
     //on the left side 
-	for(i = leftVal; i < rightVal; i++){
+    for(i = leftVal; i < rightVal; i++){
 	
-		//While left value is less than pivot, move the left pointer over to the right
+	    //While left value is less than pivot, move the left pointer over to the right
         if(arr[i] < iPivot){
             //Move the left indices to the right if current index is less than pivot
             leftInd++;
@@ -78,13 +78,13 @@ void quickSort(int arr[], int min, int max){
 //Driver program for testing purposes
 int main(){
 
-	int arr[] = {5,1,4,2,8};
-	size_t arrLen = (int) ( sizeof(arr) / sizeof(arr[0]));
+    int arr[] = {5,1,4,2,8};
+    size_t arrLen = (int) ( sizeof(arr) / sizeof(arr[0]));
 
     printf("Initial Array: ");
     displayArr(arr, arrLen);
 
-	quickSort(arr, 0, arrLen-1);
+    quickSort(arr, 0, arrLen-1);
 
     printf("Sorted Array: ");
     displayArr(arr, arrLen);
